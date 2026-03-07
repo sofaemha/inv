@@ -1,3 +1,13 @@
 import { createAuthClient } from "better-auth/react";
 
-export const { signIn, signUp, signOut, useSession } = createAuthClient();
+export const auth = createAuthClient();
+
+export const OAuth = {
+  github: async () => {
+    const data = await auth.signIn.social({
+      provider: "github",
+      requestSignUp: false,
+    });
+    return data;
+  },
+};

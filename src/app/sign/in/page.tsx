@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/provider/auth/client";
+import { auth, OAuth } from "@/provider/auth/client";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function SignInPage() {
 
     const formData = new FormData(e.currentTarget);
 
-    const res = await signIn.email({
+    const res = await auth.signIn.email({
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     });
@@ -22,7 +22,7 @@ export default function SignInPage() {
     if (res.error) {
       setError(res.error.message || "Something went wrong.");
     } else {
-      router.push("/dashboard");
+      router.push("/~");
     }
   }
 
@@ -52,6 +52,14 @@ export default function SignInPage() {
         >
           {" "}
           Sign In
+        </button>{" "}
+        <button
+          type="button"
+          onClick={() => OAuth.github()}
+          className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
+        >
+          {" "}
+          Sign In with GitHub
         </button>{" "}
       </form>{" "}
     </main>

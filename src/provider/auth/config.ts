@@ -1,11 +1,18 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import prisma from "@/provider/prisma/console/client";
+import { organization } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
+
+  plugins: [organization({
+    allowUserToCreateOrganization: false,
+    membershipLimit: 100,
+    invitationExpiresIn: 60 * 60 * 24,
+  })],
   emailAndPassword: {
     enabled: true,
   },
@@ -18,4 +25,3 @@ export const auth = betterAuth({
   },
   //   trustedOrigins: ["http://localhost:8080"],
 });
-

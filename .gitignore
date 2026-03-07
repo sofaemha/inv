@@ -18,6 +18,7 @@
 /out/
 
 # production
+remove*.md
 /build
 
 # misc

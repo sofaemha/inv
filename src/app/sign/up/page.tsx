@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/provider/auth/client";
+import { auth } from "@/provider/auth/client";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function SignUpPage() {
 
     const formData = new FormData(e.currentTarget);
 
-    const res = await signUp.email({
+    const res = await auth.signUp.email({
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       password: formData.get("password") as string,
@@ -23,7 +23,7 @@ export default function SignUpPage() {
     if (res.error) {
       setError(res.error.message || "Something went wrong.");
     } else {
-      router.push("/dashboard");
+      router.push("/~");
     }
   }
 

@@ -23,7 +23,6 @@
     "prisma:p:migrate": "node script/prisma.mjs migrate postgresql",
     "prisma:p:format": "node script/prisma.mjs format postgresql",
     "auth:generate": "node script/auth.mjs generate",
-    "auth:migrate": "node script/auth.mjs migrate",
     "auth:secret": "node script/auth.mjs secret",
     "auth:info": "node script/auth.mjs info"
   },
