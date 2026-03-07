@@ -3,14 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write"
+    "x": "pnpm next:dev",
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "biome:check": "pnpm exec biome check",
+    "biome:format": "pnpm exec biome format --write",
+    "prisma:c:generate": "node script/prisma.mjs generate console",
+    "prisma:c:push": "node script/prisma.mjs push console",
+    "prisma:c:migrate": "node script/prisma.mjs migrate console",
+    "prisma:c:studio": "node script/prisma.mjs studio console",
+    "prisma:c:format": "node script/prisma.mjs format console",
+    "prisma:p:generate": "node script/prisma.mjs generate postgresql",
+    "prisma:p:push": "node script/prisma.mjs push postgresql",
+    "prisma:p:migrate": "node script/prisma.mjs migrate postgresql",
+    "prisma:p:format": "node script/prisma.mjs format postgresql",
+    "auth:generate": "node script/auth.mjs generate",
+    "auth:migrate": "node script/auth.mjs migrate",
+    "auth:secret": "node script/auth.mjs secret",
+    "auth:info": "node script/auth.mjs info"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^7.4.2",
+    "better-auth": "^1.5.4",
+    "dotenv": "^17.3.1",
     "next": "16.1.6",
+    "pg": "^8.20.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -18,9 +37,12 @@
     "@biomejs/biome": "2.2.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.18.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "prisma": "^7.4.2",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
