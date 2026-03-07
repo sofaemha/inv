@@ -4,5 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
+}
+
+enum crdb_internal_region {
+  aws_ap_southeast_3 @map("aws-ap-southeast-3")
 }

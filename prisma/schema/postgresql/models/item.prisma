@@ -1,0 +1,35 @@
+model Item {
+  id          String    @id @default(cuid())
+  name        String
+  sku         String    @unique
+  description String?
+  spaceId     String?
+  categoryId  String?
+  status      Status    @default(AVAILABLE)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime  @updatedAt @db.Timestamptz(6)
+  category    Category? @relation(fields: [categoryId], references: [id])
+  space       Space?    @relation(fields: [spaceId], references: [id])
+
+  @@map("item")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(6)
+  items       Item[]
+
+  @@map("item_category")
+}
+
+enum Status {
+  AVAILABLE
+  IN_USE
+  MAINTENANCE
+  BROKEN
+
+  @@map("item_status")
+}

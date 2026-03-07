@@ -20,6 +20,7 @@ const COMMANDS = {
   push: "prisma db push",
   pull: "prisma db pull",
   migrate: "prisma migrate dev",
+  reset: "prisma migrate reset",
   studio: "prisma studio",
   format: "prisma format",
 };

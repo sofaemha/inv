@@ -1,0 +1,14 @@
+model Asset {
+  id           String    @id @default(cuid())
+  name         String
+  license      String    @unique
+  description  String?
+  type         String
+  acquiredDate DateTime? @db.Timestamptz(6)
+  expiredDate  DateTime? @db.Timestamptz(6)
+  value        Float?
+  createdAt    DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(6)
+
+  @@map("asset")
+}

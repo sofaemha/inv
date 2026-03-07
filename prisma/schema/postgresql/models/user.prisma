@@ -1,0 +1,29 @@
+model Profile {
+  id           String   @id @default(cuid())
+  pid          String   @unique
+  email        String
+  fullName     String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(6)
+  admins       Admin[]
+
+  @@map("user_profile")
+}
+
+model Admin {
+  id     String  @id @default(cuid())
+  userId String
+  key    String
+  user   Profile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, key])
+  @@index([key])
+  @@map("user_admin")
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  USER
+}

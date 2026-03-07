@@ -1,0 +1,47 @@
+model Site {
+  siteName         String
+  siteCity         String
+  heroHeadline     String
+  heroSubheadline  String
+  heroCtaText      String
+  heroCtaHref      String
+  companyName      String
+  companyAbout     String
+  companyAddress   String?
+  supportEmail     String?
+  logoBase64       String?
+  logoMime         String?
+  logoSize         Int?
+  whatsappSupport  String?
+  whatsappAdmin    String?
+  whatsappTemplate String?
+  termsTitle       String?
+  termsContent     String?
+  privacyTitle     String?
+  privacyContent   String?
+  instagramUrl     String?
+  showInstagram    Boolean  @default(false)
+  facebookUrl      String?
+  showFacebook     Boolean  @default(false)
+  shopeeUrl        String?
+  showShopee       Boolean  @default(false)
+  tiktokUrl        String?
+  showTiktok       Boolean  @default(false)
+  websiteUrl       String?
+  showWebsite      Boolean  @default(false)
+  footerSocialText String?
+  supportLinkText  String?
+  supportLinkHref  String?
+  faqLinkText      String?
+  faqLinkHref      String?
+  termsLinkText    String?
+  termsLinkHref    String?
+  privacyLinkText  String?
+  privacyLinkHref  String?
+  createdAt        DateTime @default(now()) @db.Timestamptz(6)
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  primaryColor     String   @default("#0f172a")
+  secondaryColor   String   @default("#f1f5f9")
+
+  @@map("site")
+}
