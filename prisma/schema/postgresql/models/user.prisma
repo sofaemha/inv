@@ -1,12 +1,20 @@
+model User {
+  id    String  @id @default(cuid())
+  email String  @unique
+  pid   String? @unique
+
+  @@map("user")
+}
+
 model Profile {
-  id           String   @id @default(cuid())
-  pid          String   @unique
-  email        String
-  fullName     String
-  role         Role     @default(USER)
-  createdAt    DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt    DateTime @updatedAt @db.Timestamptz(6)
-  admins       Admin[]
+  id        String   @id @default(cuid())
+  pid       String   @unique
+  email     String
+  fullName  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+  admins    Admin[]
 
   @@map("user_profile")
 }

@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth, OAuth } from "@/provider/auth/client";
 
 export default function SignInPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search);
+    const error = param.get("error");
+    if (error) {
+      setError(error);
+    }
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,7 +63,7 @@ export default function SignInPage() {
         </button>{" "}
         <button
           type="button"
-          onClick={() => OAuth.github()}
+          onClick={async () => await OAuth.github()}
           className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
         >
           {" "}
