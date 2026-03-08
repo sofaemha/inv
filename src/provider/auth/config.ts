@@ -8,11 +8,13 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
 
-  plugins: [organization({
-    allowUserToCreateOrganization: false,
-    membershipLimit: 100,
-    invitationExpiresIn: 60 * 60 * 24,
-  })],
+  plugins: [
+    organization({
+      allowUserToCreateOrganization: false,
+      membershipLimit: 100,
+      invitationExpiresIn: 60 * 60 * 24,
+    }),
+  ],
   emailAndPassword: {
     enabled: true,
   },

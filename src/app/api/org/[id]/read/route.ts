@@ -14,7 +14,10 @@ export async function GET(req: NextRequest, { params }: Params) {
     });
 
     if (!org) {
-      return NextResponse.json({ error: "Organization not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Organization not found" },
+        { status: 404 },
+      );
     }
 
     return NextResponse.json(org);

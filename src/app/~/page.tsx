@@ -5,7 +5,7 @@ import { auth } from "@/provider/auth/client";
 import { useEffect } from "react";
 import Image from "next/image";
 
-export default function Dashboard() {
+export default function Dash() {
   const router = useRouter();
   const { data: session, isPending } = auth.useSession();
 

@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/provider/auth/config";
 import { headers } from "next/headers";
