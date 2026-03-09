@@ -2,19 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth, OAuth } from "@/provider/auth/admin";
+import { auth, OAuth } from "@/provider/auth/client";
+import { AuthView, SignedIn } from "@daveyplate/better-auth-ui";
 
 export default function SignInPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     const param = new URLSearchParams(window.location.search);
     const error = param.get("error");
     if (error) {
       setError(error);
     }
-  }, [])
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,39 +38,32 @@ export default function SignInPage() {
   return (
     <main className="max-w-md h-screen flex items-center justify-center flex-col mx-auto p-6 space-y-4 text-white">
       <h1 className="text-2xl font-bold">Sign In</h1>
+      <AuthView
+        cardHeader={
+          <div className="flex flex-col gap-2">
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded"
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              onClick={() => router.push("/sign-up")}
+              className="w-full bg-gray-500 text-white p-2 rounded"
+            >
+              Sign Up
+            </button>
+          </div>
+        }
+        classNames={{
+          header: "text-center",
+          form: {
+            base: "hidden",
+          },
+        }}
+      />
       {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {" "}
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
-        />{" "}
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          className="w-full rounded-md bg-neutral-900 border border-neutral-700 px-3 py-2"
-        />{" "}
-        <button
-          type="submit"
-          className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
-        >
-          {" "}
-          Sign In
-        </button>{" "}
-        <button
-          type="button"
-          onClick={async () => await OAuth.github()}
-          className="w-full bg-white text-black font-medium rounded-md px-4 py-2 hover:bg-gray-200"
-        >
-          {" "}
-          Sign In with GitHub
-        </button>{" "}
-      </form>{" "}
     </main>
   );
 }

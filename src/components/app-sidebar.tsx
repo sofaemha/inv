@@ -25,6 +25,7 @@ import { NavProjects } from "./nav-projects";
 import { NavUser } from "./nav-user";
 import { SearchCombobox } from "./search-combobox";
 import { TeamSwitcher } from "./team-switcher";
+import { UserButton } from "@daveyplate/better-auth-ui";
 
 // This is sample data.
 const data = {
@@ -168,6 +169,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarSeparator className="mx-0" />
       <SidebarFooter>
+        <UserButton
+          className="border-destructive w-64 bg-destructive/30"
+          classNames={{
+            content: {
+              avatar: {
+                fallback: "bg-destructive text-white",
+              },
+            },
+          }}
+          size="default"
+        />
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>

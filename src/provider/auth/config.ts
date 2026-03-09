@@ -14,7 +14,7 @@ function isEmailAllowed(email: string): boolean {
 }
 
 export const authGuest = betterAuth({
-  baseURL: process.env.BETTER_AUTH_USER?? "http://localhost:3000",
+  baseURL: process.env.BETTER_AUTH_USER ?? "http://localhost:3000",
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
