@@ -13,8 +13,8 @@ function isEmailAllowed(email: string): boolean {
   return ALLOWED_DOMAINS.has(domain) || ALLOWED_EMAILS.has(lower);
 }
 
-export const auth = betterAuth({
-  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+export const authGuest = betterAuth({
+  baseURL: process.env.BETTER_AUTH_USER?? "http://localhost:3000",
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
@@ -38,9 +38,6 @@ export const auth = betterAuth({
       invitationExpiresIn: 60 * 60 * 24,
     }),
   ],
-  emailAndPassword: {
-    enabled: true,
-  },
   socialProviders: {
     github: {
       enabled: true,
@@ -48,5 +45,40 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
   },
-  trustedOrigins: ["http://100.94.18.52:3000"],
+  trustedOrigins: ["http://localhost:3000", "http://192.168.12.100:3000"],
+});
+
+export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_ADMIN ?? "http://localhost:3000",
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          if (!isEmailAllowed(user.email)) {
+            throw new APIError("FORBIDDEN", {
+              message: "unauthorized",
+            });
+          }
+        },
+      },
+    },
+  },
+  plugins: [
+    organization({
+      allowUserToCreateOrganization: false,
+      membershipLimit: 100,
+      invitationExpiresIn: 60 * 60 * 24,
+    }),
+  ],
+  socialProviders: {
+    github: {
+      enabled: true,
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    },
+  },
+  trustedOrigins: ["http://100.94.18.52:3000", "http://100.104.25.60:3000"],
 });

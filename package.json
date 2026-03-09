@@ -6,7 +6,7 @@
     "x": "pnpm next:dev",
     "next:dev": "next dev",
     "next:build": "next build",
-    "next:start": "next start",
+    "start": "next start",
     "biome:check": "pnpm exec biome check",
     "biome:format": "pnpm exec biome format --write",
     "prisma:c:generate": "node script/prisma.mjs generate console",

@@ -69,7 +69,7 @@ export function SearchCombobox() {
             className="absolute hidden lg:block right-2 rounded-sm text-muted-foreground cursor-pointer"
             onClick={() => setOpen(false)}
             size="icon"
-            variant="unstyled"
+            variant="default"
           >
             <Kbd className="bg-accent">Esc</Kbd>
           </Button>

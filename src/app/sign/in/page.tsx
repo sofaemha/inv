@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth, OAuth } from "@/provider/auth/client";
+import { auth, OAuth } from "@/provider/auth/admin";
 
 export default function SignInPage() {
   const router = useRouter();
