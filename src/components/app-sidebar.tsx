@@ -20,9 +20,8 @@ import {
   SidebarHeader,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { NavMain } from "./nav-main";
+import { NavMain } from "./ux/sidebar/navigation/root";
 import { NavProjects } from "./nav-projects";
-import { NavUser } from "./nav-user";
 import { SearchCombobox } from "./search-combobox";
 import { TeamSwitcher } from "./team-switcher";
 import { UserButton } from "@daveyplate/better-auth-ui";
@@ -170,17 +169,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarSeparator className="mx-0" />
       <SidebarFooter>
         <UserButton
-          className="border-destructive w-64 bg-destructive/30"
+          className="bg-transparent text-sidebar-foreground rounded-md !px-4 !py-3 text-left focus-visible:outline focus-visible:outline-ring focus-visible:ring-4 focus-visible:ring-ring/10 text-sm hover:text-sidebar-accent-foreground hover:bg-sidebar-accent select-none"
           classNames={{
-            content: {
-              avatar: {
-                fallback: "bg-destructive text-white",
+            trigger: {
+              user: {
+                avatar: {
+                  base: "hidden",
+                },
               },
+            },
+            content: {
+              base: "!min-w-min w-(--radix-dropdown-menu-trigger-width) max-h-(--radix-dropdown-menu-content-available-height)",
+              menuItem: "px-3.5 py-2",
             },
           }}
           size="default"
         />
-        <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
   );

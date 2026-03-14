@@ -1,6 +1,7 @@
 model Site {
   siteName         String
   siteCity         String
+  siteNav          Json
   heroHeadline     String
   heroSubheadline  String
   heroCtaText      String
